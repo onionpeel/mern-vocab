@@ -1,14 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 
 const {Word} = require('./../../models/Word');
+
+router.get(`/dictionary/:word`, async (req, res) => {
+  try{
+    const word = req.params.word;
+    const url = `https://jisho.org/api/v1/search/words?keyword=${word}`;
+    const translation = await axios.get(url);
+    const sample = translation.data.data;
+
+    res.send(sample);
+  } catch(e) {
+    console.log(e)
+  }
+});
 
 //Add a word
 router.post('/', async (req, res) => {
   try{
     const word = new Word({
-      term: req.body.term,
-      definition: req.body.definition
+      word: req.body.word,
+      reading: req.body.reading,
+      english: req.body.english
     });
 
     let newWord = await word.save();
