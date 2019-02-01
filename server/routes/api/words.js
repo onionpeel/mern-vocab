@@ -38,11 +38,7 @@ router.get('/', async (req, res) => {
   try {
     let words = await Word.find({});
     res.send(words);
-    // res.send({
-    //   data: products.map(item => {
-    //     return {_id: item._id, name: item.name}
-    //   })
-    // });
+
   } catch(e) {
     res.status(400).send();
   };

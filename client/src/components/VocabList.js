@@ -26,7 +26,7 @@ class VocabList extends Component {
 
   onDeleteClick = async (id) => {
     try {
-      const res = await axios.delete(`api/words/${id}`);
+      await axios.delete(`api/words/${id}`);
 
       const newVocab = this.state.vocabulary.filter(item => {
         return item._id !== id;
