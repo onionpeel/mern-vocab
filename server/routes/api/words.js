@@ -34,9 +34,25 @@ router.post('/', async (req, res) => {
 });
 
 //Retrieve all words
-router.get('/', async (req, res) => {
+// router.get('/', async (req, res) => {
+//   try {
+//     let words = await Word.find({});
+//     res.send(words);
+//
+//   } catch(e) {
+//     res.status(400).send();
+//   };
+// });
+
+//TEMPORARY TRIAL FUNCTION
+router.get('/', (req, res) => {
   try {
-    let words = await Word.find({});
+    let words = {
+      word: 'test',
+      english: 'work',
+      reading: 'hope',
+      _id: 88888
+    };
     res.send(words);
 
   } catch(e) {
