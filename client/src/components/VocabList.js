@@ -13,7 +13,7 @@ class VocabList extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/words/')
+    axios.get('/api/words')
       .then(res => {
         this.setState({
           vocabulary: res.data
