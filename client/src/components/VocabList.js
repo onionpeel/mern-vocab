@@ -28,7 +28,6 @@ class VocabList extends Component {
     try {
       const res = await axios.delete(`api/words/${id}`);
 
-      const results = res.data;
       const newVocab = this.state.vocabulary.filter(item => {
         return item._id !== id;
       });
