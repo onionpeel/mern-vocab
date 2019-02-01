@@ -58,7 +58,7 @@ class WordSearch extends Component {
     const english = vocabularyWord.senses[0].english_definitions[0];
 
     try{
-      await axios.post('/api/words', {
+      await axios.post('/api/words/', {
         word,
         reading,
         english
