@@ -43,7 +43,6 @@ class VocabList extends Component {
     return (
       <Container fluid>
         <AppNavbar />
-        <br />
         <Row>
           <Col sm={{size: 5, offset: 2}}>
             <div>

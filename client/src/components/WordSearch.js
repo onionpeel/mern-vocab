@@ -77,7 +77,6 @@ class WordSearch extends Component {
         <Row>
           <Col sm={{size: 8, offset: 2}}>
             <div>
-              <br />
               <Form onSubmit={this.onGetWordClick}>
                 <Row>
                   <Col sm="4">
