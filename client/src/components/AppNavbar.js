@@ -27,7 +27,7 @@ class AppNavbar extends Component {
   render() {
     return (
       <div>
-        <Navbar style={{backgroundColor: '#D7ADE8'}} info expand="md">
+        <Navbar style={{backgroundColor: '#D7ADE8'}} info expand="sm" className="mb-5">
           <Container>
             <NavbarBrand href="/" style={{color: "#181B17"}}>That Japanese vocabulary list you've always longed for</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
