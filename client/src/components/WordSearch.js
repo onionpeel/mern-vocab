@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {Container, Form, FormGroup, Label, Input, Button, Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
-import uuidv4 from 'uuid/v4';
+import {connect} from 'react-redux';
+import {getWordFromAPI, selectWord} from './../actions/vocabActions';
 
 class WordSearch extends Component {
   constructor() {
     super();
     this.state = {
-      word: '',
-      vocabList: []
+      word: ''
     };
   }
 
@@ -20,55 +19,13 @@ class WordSearch extends Component {
 
   onGetWordClick = async e => {
     e.preventDefault();
-
     const word = this.state.word;
-    const result = await axios.get(`/api/words/dictionary/${word}`);
-    const term = result.data
-
-    const newTerm = term.map(vocabObject => {
-      const id = uuidv4();
-      vocabObject.id = id;
-      vocabObject.selected = false;
-      return vocabObject;
-    })
-
-    this.setState({
-      vocabList: newTerm
-    })
+    await getWordFromAPI(word);
   }
 
   onShowSelectedWord = async id => {
-    const vocabulary = this.state.vocabList;
-    const vocabArray = vocabulary.map(vocabObject => {
-      if (vocabObject.id === id) {
-        vocabObject.selected = "Added!";
-      }
-      return vocabObject;
-    });
-    this.setState({
-      vocabList: vocabArray
-    })
-
-    const vocabularyWord = vocabulary.find(vocabObject => {
-      return vocabObject.id === id;
-    })
-
-    const word = vocabularyWord.japanese[0].word;
-    const reading = vocabularyWord.japanese[0].reading;
-    const english = vocabularyWord.senses[0].english_definitions[0];
-
-    try{
-      await axios.post('/api/words/', {
-        word,
-        reading,
-        english
-      })
-    } catch(e) {
-      console.log(e)
-    }
+    await selectWord(id);
   }
-
-
 
   render() {
     const vocabulary = this.state.vocabList;
@@ -118,4 +75,15 @@ class WordSearch extends Component {
   }
 };
 
-export default WordSearch;
+
+const mapPropsToComponent = state => {
+  return {
+    vocabList: state.vocabList
+  }
+};
+
+const mapDispatchToProps = {
+  getWordFromAPI
+};
+
+export default connect(mapPropsToComponent, mapDispatchToProps)(WordSearch);

@@ -1,0 +1,2 @@
+export const GET_DEFINITION = 'GET_DEFINITION';
+export const SELECT_VOCAB_WORD = 'SELECT_VOCAB_WORD';
