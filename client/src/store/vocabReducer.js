@@ -1,7 +1,8 @@
-import {GET_DEFINITION} from './../actions/types';
+import {GET_DEFINITION, SELECT_VOCAB_WORD, SET_WORD_VALUE} from './../actions/types';
 
 const initialState = {
-  vocabList: []
+  vocabList: [],
+  word: ''
 };
 
 const vocabReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const vocabReducer = (state = initialState, action) => {
         ...state,
         vocabList: action.payload
       };
+    case SET_WORD_VALUE:
+      return {
+        ...state,
+        word: action.payload
+      }
     default:
       return state;
   }

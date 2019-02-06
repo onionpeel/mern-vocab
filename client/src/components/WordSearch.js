@@ -1,25 +1,17 @@
 import React, {Component} from 'react';
 import {Container, Form, FormGroup, Label, Input, Button, Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import {connect} from 'react-redux';
-import {getWordFromAPI, selectWord} from './../actions/vocabActions';
+import {getWordFromAPI, selectWord, setWordValue} from './../actions/vocabActions';
 
 class WordSearch extends Component {
-  constructor() {
-    super();
-    this.state = {
-      word: ''
-    };
-  }
-
   onChange = e => {
-    this.setState({
-      word: e.target.value
-    })
+    const word = e.target.value;
+    setWordValue(word);
   }
 
   onGetWordClick = async e => {
     e.preventDefault();
-    const word = this.state.word;
+    const {word} = this.props.vocab;
     await getWordFromAPI(word);
   }
 
@@ -28,7 +20,7 @@ class WordSearch extends Component {
   }
 
   render() {
-    const vocabulary = this.state.vocabList;
+    const {vocabList} = this.props.vocab;
     return (
       <Container fluid>
         <Row>
@@ -78,7 +70,7 @@ class WordSearch extends Component {
 
 const mapPropsToComponent = state => {
   return {
-    vocabList: state.vocabList
+    vocab: state.vocab
   }
 };
 

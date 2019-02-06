@@ -4,12 +4,12 @@ import AppNavbar from './AppNavbar';
 import {Container, Row, Col, ListGroup, ListGroupItem, Button} from 'reactstrap';
 
 class VocabList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      vocabulary: []
-    }
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     vocabulary: []
+  //   }
+  // }
 
   componentDidMount() {
     axios.get('/api/words/')
@@ -39,7 +39,7 @@ class VocabList extends Component {
   }
 
   render() {
-    const vocabulary = this.state.vocabulary;
+    const {vocabulary} = this.props.vocabularyStudyList;
     return (
       <Container fluid>
         <AppNavbar />
@@ -75,4 +75,14 @@ class VocabList extends Component {
   }
 }
 
-export default VocabList;
+const mapPropsToComponent = state => {
+  return {
+    vocabularyStudyList: state.vocabularyStudyList
+  }
+};
+
+const mapDispatchToProps = {
+
+};
+
+export default connect(mapPropsToComponent, mapDispatchToProps)(VocabList);

@@ -3,6 +3,17 @@ import axios from 'axios';
 import uuidv4 from 'uuid/v4';
 
 
+export const setWordValue = word => dispatch => {
+  try{
+    dispatch({
+      type: SET_WORD_VALUE,
+      payload: word
+    })
+  }catch (e) {
+    console.log(e);
+  };
+};
+
 export const getWordFromAPI = async (word) => dispatch => {
   try{
     const result = await axios.get(`/api/words/dictionary/${word}`);
@@ -26,8 +37,8 @@ export const getWordFromAPI = async (word) => dispatch => {
 
 export const selectWord = async (id) => {
   try {
-    const vocabulary = this.state.vocabList;
-    const vocabArray = vocabulary.map(vocabObject => {
+    const {vocabList} = this.props.vocab;
+    const vocabArray = vocabList.map(vocabObject => {
       if (vocabObject.id === id) {
         vocabObject.selected = "Added!";
       }
@@ -39,7 +50,7 @@ export const selectWord = async (id) => {
       payload: vocabArray
     });
 
-    const vocabularyWord = vocabulary.find(vocabObject => {
+    const vocabularyWord = vocabList.find(vocabObject => {
       return vocabObject.id === id;
     })
 
