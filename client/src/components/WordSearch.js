@@ -3,20 +3,22 @@ import {Container, Form, FormGroup, Label, Input, Button, Row, Col, ListGroup, L
 import {connect} from 'react-redux';
 import {getWordFromAPI, selectWord, setWordValue} from './../actions/vocabActions';
 
+
 class WordSearch extends Component {
-  onChange = e => {
+  onChange = async e => {
     const word = e.target.value;
-    setWordValue(word);
+    await this.props.setWordValue(word);
   }
 
-  onGetWordClick = async e => {
+  onGetWordClick = e => {
     e.preventDefault();
     const {word} = this.props.vocab;
-    await getWordFromAPI(word);
+    this.props.getWordFromAPI(word);
   }
 
-  onShowSelectedWord = async id => {
-    await selectWord(id);
+  onShowSelectedWord = id => {
+    const {vocabList} = this.props.vocab;
+    this.props.selectWord(id, vocabList);
   }
 
   render() {
@@ -40,7 +42,7 @@ class WordSearch extends Component {
 
                 <br />
                 <ListGroup>
-                  {vocabulary.map((vocab, index) => (
+                  {vocabList.map((vocab, index) => (
                     <ListGroupItem key={index}>
                       <Row>
                         <Col sm="2">{vocab.japanese[0].word}</Col>
@@ -53,7 +55,7 @@ class WordSearch extends Component {
                             Add to list
                           </Button>
                         </Col>
-                        <Col sm="2">{this.state.vocabList[index].selected}</Col>
+                        <Col sm="2">{vocabList[index].selected}</Col>
                       </Row>
                     </ListGroupItem>
                   ))}
@@ -75,7 +77,9 @@ const mapPropsToComponent = state => {
 };
 
 const mapDispatchToProps = {
-  getWordFromAPI
+  getWordFromAPI,
+  selectWord,
+  setWordValue
 };
 
 export default connect(mapPropsToComponent, mapDispatchToProps)(WordSearch);

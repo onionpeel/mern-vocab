@@ -1,45 +1,24 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import AppNavbar from './AppNavbar';
 import {Container, Row, Col, ListGroup, ListGroupItem, Button} from 'reactstrap';
+import {getStudyList, deleteWord} from './../actions/vocabularyStudyListActions';
+import {connect} from 'react-redux';
+
 
 class VocabList extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     vocabulary: []
-  //   }
-  // }
-
   componentDidMount() {
-    axios.get('/api/words/')
-      .then(res => {
-        this.setState({
-          vocabulary: res.data
-        })
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    const {vocabulary} = this.props.vocabularyStudyList;
+    this.props.getStudyList();
   }
 
-  onDeleteClick = async (id) => {
-    try {
-      await axios.delete(`api/words/${id}`);
-
-      const newVocab = this.state.vocabulary.filter(item => {
-        return item._id !== id;
-      });
-      await this.setState({
-        vocabulary: newVocab
-      })
-    } catch(e) {
-      console.log(e)
-    }
+  onDeleteClick = _id => {
+    const {vocabulary} = this.props.vocabularyStudyList;
+    this.props.deleteWord(_id, vocabulary);
   }
 
   render() {
     const {vocabulary} = this.props.vocabularyStudyList;
+    console.log('render method: ', vocabulary)
     return (
       <Container fluid>
         <AppNavbar />
@@ -82,7 +61,8 @@ const mapPropsToComponent = state => {
 };
 
 const mapDispatchToProps = {
-
+  getStudyList,
+  deleteWord
 };
 
 export default connect(mapPropsToComponent, mapDispatchToProps)(VocabList);

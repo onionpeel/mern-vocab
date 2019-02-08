@@ -1,4 +1,4 @@
-import {} from './types';
+import {SET_DEFINITION, SELECT_VOCAB_WORD, SET_WORD_VALUE} from './types';
 import axios from 'axios';
 import uuidv4 from 'uuid/v4';
 
@@ -14,7 +14,7 @@ export const setWordValue = word => dispatch => {
   };
 };
 
-export const getWordFromAPI = async (word) => dispatch => {
+export const getWordFromAPI = (word) => async dispatch => {
   try{
     const result = await axios.get(`/api/words/dictionary/${word}`);
     const term = result.data
@@ -26,8 +26,8 @@ export const getWordFromAPI = async (word) => dispatch => {
       return vocabObject;
     });
 
-    await dispatch({
-      type: GET_DEFINITION,
+    dispatch({
+      type: SET_DEFINITION,
       payload: newTerm
     })
   }catch(e) {
@@ -35,9 +35,8 @@ export const getWordFromAPI = async (word) => dispatch => {
   };
 };
 
-export const selectWord = async (id) => {
+export const selectWord = (id, vocabList) => async dispatch => {
   try {
-    const {vocabList} = this.props.vocab;
     const vocabArray = vocabList.map(vocabObject => {
       if (vocabObject.id === id) {
         vocabObject.selected = "Added!";
