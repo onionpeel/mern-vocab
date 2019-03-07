@@ -3,7 +3,7 @@ const {mongoose} = require('./../db/mongoose');
 const WordSchema = new mongoose.Schema({
   word: {
     type: String,
-    required: true,
+    required: false,
     minlength: 1,
     trim: true
   },

@@ -1,0 +1,18 @@
+.pic-text p{
+  text-align: left;
+}
+
+.pic-item {
+  width: 60%;
+}
+
+.jumbo-img {
+  background-image: url("/assets/kiyomizuderaCropped.jpg");
+  background-size: cover;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2892D7;
+    border-color: #2892D7;
+}

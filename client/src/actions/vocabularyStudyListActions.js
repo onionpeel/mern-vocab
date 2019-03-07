@@ -5,9 +5,6 @@ export const getStudyList = () => async dispatch => {
   try{
     const res =  await axios.get('/api/words/');
 
-    const temp = res.data;
-    console.log('temp: ', temp)
-
     dispatch({
       type: GET_STUDY_LIST,
       payload: res.data
@@ -19,8 +16,7 @@ export const getStudyList = () => async dispatch => {
 
 export const deleteWord = (id, vocabulary) => async dispatch => {
   try {
-    await axios.delete(`api/words/${id}`);
-
+    await axios.delete(`/api/words/${id}`);
     const newVocab = vocabulary.filter(item => {
       return item._id !== id;
     });

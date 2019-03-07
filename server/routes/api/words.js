@@ -11,7 +11,8 @@ router.get(`/dictionary/:word`, async (req, res) => {
     const translation = await axios.get(url);
     const sample = translation.data.data;
 
-    res.send(sample);
+    const tenItems = sample.slice(0, 10);
+    res.send(tenItems);
   } catch(e) {
     console.log(e)
   }
@@ -69,6 +70,7 @@ router.delete('/:id', async (req, res) => {
     };
   } catch(e) {
     res.sendStatus(404);
+    console.log("NOT FOUND!")
   };
 });
 
