@@ -7,6 +7,7 @@ const path = require('path');
 
 //import the router module
 const words = require('./routes/api/words');
+const user = require('./routes/api/user');
 
 const allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(allowCrossDomain);
 
 app.use('/api/words', words);
+app.use('/api/user', user);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

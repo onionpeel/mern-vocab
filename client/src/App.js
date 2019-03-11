@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import News from './components/News';
@@ -8,7 +8,7 @@ import Navbar from './components/CustomNavbar';
 import Dictionary from './components/Dictionary';
 import AddVocabulary from './components/AddVocabulary';
 import VocabList from './components/VocabList';
-import Registration from './modals/Registration';
+import Registration from './components/Registration';
 
 class App extends Component {
   render() {

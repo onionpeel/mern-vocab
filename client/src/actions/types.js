@@ -3,3 +3,4 @@ export const SELECT_VOCAB_WORD = 'SELECT_VOCAB_WORD';
 export const SET_WORD_VALUE = 'SET_WORD_VALUE';
 export const GET_STUDY_LIST = 'GET_STUDY_LIST';
 export const DELETE_WORD = 'DELETE_WORD';
+export const REGISTER_USER = 'REGISTER_USER';
