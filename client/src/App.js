@@ -9,6 +9,7 @@ import Dictionary from './components/Dictionary';
 import AddVocabulary from './components/AddVocabulary';
 import VocabList from './components/VocabList';
 import Registration from './components/Registration';
+import Dashboard from './components/Dashboard';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route path="/addvocabulary" component={AddVocabulary}/>
           <Route path="/vocablist" component={VocabList}/>
           <Route path="/registration" component={Registration} />
+          <Route path="/dashboard" component={Dashboard} />
         </div>
       </Router>
     );

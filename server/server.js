@@ -3,8 +3,13 @@ require('./config/config');
 //import libraries for setting up the application server
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const passportLocalMongoose = require('passport-local-mongoose');
+
 const path = require('path');
 
+const {User} = require('./models/User');
 //import the router module
 const words = require('./routes/api/words');
 const user = require('./routes/api/user');
@@ -17,7 +22,19 @@ const allowCrossDomain = function(req, res, next) {
 };
 
 const app = express();
+
 app.use(bodyParser.json());
+app.use(session({
+                secret: "miracle fungus",
+                resave: false,
+                saveUnitialized: false}));
+app.use(express.urlencoded({extended: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //Set up the CORS before establishing the routes
 app.use(allowCrossDomain);
 
