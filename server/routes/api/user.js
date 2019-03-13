@@ -20,18 +20,18 @@ const {User} = require('./../../models/User');
 // });
 
 
-router.post('/register', function(req, res, next) {
+router.post('/register', async function(req, res, next) {
   console.log('registering user');
 
-  User.register(new User({username: req.body.username}), req.body.password, function(err) {
+  await User.register(new User({username: req.body.name, email: req.body.email}), req.body.password, function(err) {
     if (err) {
       console.log('error while user register!', err);
       return next(err);
     }
 
     console.log('user registered!');
-
-    // res.redirect('/');
+    const result = req.body.name;
+    res.send(result);
   });
 });
 

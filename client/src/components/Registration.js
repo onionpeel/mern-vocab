@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {Form, Button, Container, Row, Col, Image} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {registerNewUser} from './../actions/registrationActions';
@@ -7,7 +8,7 @@ class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      name: '',
       email: '',
       password: ''
     }
@@ -16,7 +17,7 @@ class Registration extends Component {
   onRegister = e => {
     e.preventDefault();
     const newUser = {
-      username: this.state.username,
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password
     }
@@ -29,9 +30,17 @@ class Registration extends Component {
     })
   }
 
+  renderRedirect = () => {
+    const tempUsername = this.props.registeredUsername.username;
+    if (tempUsername.length > 0) {
+      return <Redirect to='/dashboard' />
+    }
+  }
+
   render() {
     return (
       <Container>
+        {this.renderRedirect()}
         <Row>
           <Col xs={12} sm={4} className="sidebar-section">
               <Image src="assets/yukataCropped.jpg" />
@@ -42,7 +51,7 @@ class Registration extends Component {
             <Form onSubmit={this.onRegister}>
               <Form.Group controlId="formGroupName">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Username" name="username" onChange={this.onChange}/>
+                <Form.Control type="text" placeholder="name" name="name" onChange={this.onChange}/>
               </Form.Group>
               <Form.Group controlId="formGroupEmail">
                 <Form.Label>Email address</Form.Label>

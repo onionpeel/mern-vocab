@@ -10,6 +10,8 @@ export const registerNewUser = newUser => async dispatch => {
       type: REGISTER_USER,
       payload: username
     });
+
+    
   } catch (e) {
       console.log(e);
   }

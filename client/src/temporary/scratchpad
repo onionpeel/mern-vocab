@@ -1,1 +1,25 @@
 
+<ButtonToolbar>
+  <Button
+    variant="link"
+    style={{color: "white"}}
+    onClick={() => this.setState({ modalShow: true })}
+  >
+    Login
+  </Button>
+
+  <Login
+    show={this.state.modalShow}
+    onHide={modalClose}
+  />
+</ButtonToolbar>
+
+
+<Link to="/registration">
+  <Button variant="light" onClick={this.props.onHide}>here</Button>
+</Link>
+
+<Nav>
+  <NavLink activeStyle={{color: "red"}} to="/registration" onClick={this.props.onHide}>here
+  </NavLink>
+</Nav>

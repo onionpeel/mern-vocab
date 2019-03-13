@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, Button, Container, ButtonToolbar} from 'react-bootstrap';
+import {Navbar, Nav, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './CustomNavbar.css';
 
@@ -12,9 +12,10 @@ class CustomNavbar extends Component {
     this.state = { modalShow: false };
   }
 
+
+
   render() {
     let modalClose = () => this.setState({ modalShow: false });
-
     return (
         <Navbar expand="lg" sticky="top">
           <Container>
@@ -29,20 +30,14 @@ class CustomNavbar extends Component {
                 <Nav.Link href="/news">News</Nav.Link>
                 <Nav.Link href="/dictionary">Dictionary</Nav.Link>
 
-                <ButtonToolbar>
-                  <Button
-                    variant="link"
-                    style={{color: "white"}}
-                    onClick={() => this.setState({ modalShow: true })}
-                  >
-                    Login
-                  </Button>
-
+                <Nav>
+                  <Nav.Link variant="link" onClick={() => this.setState({ modalShow: true })}>Login</Nav.Link>
                   <Login
                     show={this.state.modalShow}
                     onHide={modalClose}
                   />
-                </ButtonToolbar>
+                </Nav>
+
               </Nav>
             </Navbar.Collapse>
           </Container>

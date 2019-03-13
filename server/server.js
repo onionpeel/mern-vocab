@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(session({
                 secret: "miracle fungus",
                 resave: false,
-                saveUnitialized: false}));
+                saveUninitialized: false}));
 app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
