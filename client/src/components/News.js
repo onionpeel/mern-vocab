@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Image} from 'react-bootstrap';
+import Navbar from './CustomNavbar';
 import './News.css';
 
 class News extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Image src="assets/fujiCropped.jpg" className="header-image" />
         <Container>
           <h2>News</h2>

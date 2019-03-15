@@ -1,18 +1,31 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, Container} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Navbar, Nav, Container, Button} from 'react-bootstrap';
+import {Link, Redirect} from 'react-router-dom';
+import axios from 'axios';
 import './CustomNavbar.css';
 
 import Login from './../modals/Login';
 
 
-class CustomNavbar extends Component {
+class DashboardNavbar extends Component {
   constructor(...args) {
     super(...args);
-    this.state = { modalShow: false };
+    this.state = {
+      modalShow: false
+    };
   }
 
-
+//This needs to be refactored so that the redirect only happens if the
+//logout is successful.  Right now, the user will be redirected to the
+//home page regardless of whether the user has been logged on the server.
+  renderRedirect = async () => {
+    if (this.state.redirect) {
+      console.log('pre-logout')
+      await axios.get('/api/user/logout');
+      console.log('post-logout')
+      // return <Redirect to="/" />
+    }
+  }
 
   render() {
     let modalClose = () => this.setState({ modalShow: false });
@@ -25,18 +38,12 @@ class CustomNavbar extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <Link to="/">Home</Link>
+                <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/news">News</Nav.Link>
                 <Nav.Link href="/dictionary">Dictionary</Nav.Link>
+                <Nav.Link onSelect={this.renderRedirect} href="/">Logout</Nav.Link>
 
-                <Nav>
-                  <Nav.Link variant="link" onClick={() => this.setState({ modalShow: true })}>Login</Nav.Link>
-                  <Login
-                    show={this.state.modalShow}
-                    onHide={modalClose}
-                  />
-                </Nav>
 
               </Nav>
             </Navbar.Collapse>
@@ -46,4 +53,4 @@ class CustomNavbar extends Component {
   }
 }
 
-export default CustomNavbar;
+export default DashboardNavbar;

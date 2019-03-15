@@ -23,3 +23,5 @@
   <NavLink activeStyle={{color: "red"}} to="/registration" onClick={this.props.onHide}>here
   </NavLink>
 </Nav>
+
+<Button onClick={this.setRedirect}>Logout</Button>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Jumbotron, Container, Row, Col, Image, Button} from 'react-bootstrap';
+import Navbar from './CustomNavbar';
 import './Home.css';
 
 class Home extends Component {
@@ -8,6 +9,7 @@ class Home extends Component {
     return (
       <div>
         <Container>
+          <Navbar />
           <Jumbotron className="jumbo-img">
             <h2>An Eclipse of the Rising Sun</h2>
             <br />

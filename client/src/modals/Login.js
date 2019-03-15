@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button, Form} from 'react-bootstrap';
+import {Modal, Button, Form, Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 class Login extends Component {
@@ -14,11 +14,9 @@ class Login extends Component {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             New user?  Register for your ninja credentials<span> </span>
-
             <Link to="/registration">
               <Button variant="light" onClick={this.props.onHide}>here</Button>
             </Link>
-
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

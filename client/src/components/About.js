@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Container, Col, Image} from 'react-bootstrap';
+import Navbar from './CustomNavbar';
 import './About.css';
 
 class About extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Image src="assets/geishaCropped.jpg" className="header-image" />
         <Container>
           <Col xs={12} sm={7}>
